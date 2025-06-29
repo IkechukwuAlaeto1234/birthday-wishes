@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Music Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        audio {
+            display: none; /* Hide the default audio player controls */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Happy Birthday!</h1>
+        <button id="playMusicBtn">Play Birthday Music</button>
+        
+        <audio id="birthdayMusic" preload="auto">
+            <source src="https://tsa-ibadancentralcorps.vercel.app/downloads/happy-birthday-254480%20(1).mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        const playMusicBtn = document.getElementById('playMusicBtn');
+        const birthdayMusic = document.getElementById('birthdayMusic');
+
+        playMusicBtn.addEventListener('click', () => {
+            if (birthdayMusic.paused) {
+                birthdayMusic.play()
+                    .then(() => {
+                        playMusicBtn.textContent = 'Pause Music';
+                    })
+                    .catch(error => {
+                        console.error("Error playing audio:", error);
+                        alert("Could not play music. Your browser might be blocking autoplay or there's an issue with the file.");
+                    });
+            } else {
+                birthdayMusic.pause();
+                playMusicBtn.textContent = 'Play Birthday Music';
+            }
+        });
+
+        // Optional: Reset button text if music ends
+        birthdayMusic.addEventListener('ended', () => {
+            playMusicBtn.textContent = 'Play Birthday Music';
+        });
+    </script>
+
+</body>
+</html>
